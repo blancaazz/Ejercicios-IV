@@ -64,3 +64,35 @@ Para hacer lo del commit:
 # Ejercicio 5
 
 *Crear un Dockerfile para el servicio web que testee la clase que se ha venido desarrollando hasta ahora.*
+
+He creado un Dockerfile con este código: 
+
+FROM node:14
+
+LABEL maintainer="blanluja@gmail.com"
+
+#establezco el directorio de trabajo en el home de node
+#en una carpeta llamada test
+WORKDIR /home/node/test
+
+#copio el task runner, dependencias del projecto
+#codigo fuente y tests al directorio anterior  
+COPY Makefile ./  
+COPY package*.json ./  
+COPY src/ ./src/  
+COPY test ./test/  
+  
+#hacemos con el task runner una instalación del projecto
+RUN make install  
+#al final, para poner un usuario distinto a root la imagen de node tiene el usuario node como opción alternativa al root  
+USER node  
+#para que cuando se cree y ejecute, se realice la instrucción de ejecutar los tests  
+CMD ["make", "tests"]  
+
+al ejecutarlo: 
+
+![dockerfile](img/dockerfile.png)
+
+## Ejercicio 6
+
+*Desplegar un contenedor en alguno de estos servicios, de prueba gratuita o gratuitos.*
