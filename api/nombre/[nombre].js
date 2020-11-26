@@ -3,6 +3,6 @@ module.exports = (req, res) => {
       query: { nombre },
     } = req
   
-    res.status(200).send(`Hello ${nombre}!`)
+    res.status(200).send(`Holi ${nombre}!`)
   }
   
