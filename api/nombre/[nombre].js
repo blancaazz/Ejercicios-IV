@@ -1,8 +1,8 @@
 module.exports = (req, res) => {
     const {
-      query: { name },
+      query: { nombre },
     } = req
   
-    res.send(`Hello ${name}!`)
+    res.status(200).send(`Hello ${nombre}!`)
   }
   
