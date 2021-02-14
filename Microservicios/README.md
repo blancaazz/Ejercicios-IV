@@ -57,10 +57,34 @@ app.listen(port);
 console.log("Servidor en el http://127.0.0.1" + port + "/");
 ```
 
-solo tiene implementado que en / devuelva un regitro en el cual se ha insertado un libro. 
+solo tiene implementado que en / devuelva un registro en el cual se ha insertado un libro. 
 
 
 ## Ejercicio 3
 
 *Programar un microservicio en express (o el lenguaje y marco elegido) que incluya variables como en el caso anterior.*
+
+He implementado esta función:   
+
+```
+app.put("/libro/:nombre/:autora/:comentario/:puntuacion",
+    function(req, res){
+        var nuevo_libro = new Libro(req.params.nombre, req.params.autora, req.params.comentario, req.params.puntuacion);
+        reg.registrarLibro(nuevo_libro);
+        res.send(nuevo_libro);
+    }
+)
+```
+
+Para probarlo usamos curl:   
+```
+
+curl -X PUT "http://127.0.0.1:8080/libro/La%20sombra%20del%20viento/Carlos%20Ruiz%20Zafón/Misterioso%20y%20entretenido/7"
+```
+que nos devuelve:   
+
+{"nombre":"La sombra del viento","autora":"Carlos Ruiz ZafÃ³n","comentario":"Misterioso y entretenido","puntuacion":"7"}
+ 
+Y si ahora hacemos curl http://127.0.0.1:8080, obtenemos el registro entero en el cual, efectivamente, está incluido el último libro.
+
 
